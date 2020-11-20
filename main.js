@@ -19,8 +19,8 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
     window.videoElem.setAttribute("playsinline", "");
 
     navigator.mediaDevices.getUserMedia({
-        video: { width: 1280, height: 720 },
-        audio: false
+        video: true ,
+        audio: true
     })
     .then(stream => {
         const videoSettings = stream.getVideoTracks()[0].getSettings();
