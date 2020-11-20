@@ -20,7 +20,7 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
 
     navigator.mediaDevices.getUserMedia({
         video: true ,
-        audio: true
+        audio: false
     })
     .then(stream => {
         const videoSettings = stream.getVideoTracks()[0].getSettings();
