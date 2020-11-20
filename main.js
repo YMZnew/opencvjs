@@ -74,7 +74,7 @@ function getFrame() {
         window.width,
         window.height
     );
-
+    
     return videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
 }
 
@@ -118,19 +118,21 @@ function processVideo() {
     window.stats.begin();
 
     const frame = getFrame();
-    const [valid, h, warped] = window.tracker.track(frame, window.width, window.height);
-    if (valid) {
-        window.tracker.performTransform(h, window.arElem);
-        drawBbox(warped);
-    }
-    else {
-        clearOverlayCtx(window.overlayCanv.getContext("2d"));
-        window.arElem.style.display = "none";
-    }
+    
+    
+//     const [valid, h, warped] = window.tracker.track(frame, window.width, window.height);
+//     if (valid) {
+//         window.tracker.performTransform(h, window.arElem);
+//         drawBbox(warped);
+//     }
+//     else {
+//         clearOverlayCtx(window.overlayCanv.getContext("2d"));
+//         window.arElem.style.display = "none";
+//     }
 
-    window.stats.end();
+//     window.stats.end();
 
-    requestAnimationFrame(processVideo);
+//     requestAnimationFrame(processVideo);
 }
 
 function createRefIm() {
