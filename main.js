@@ -117,8 +117,12 @@ window.addEventListener("mousedown", function() {
 function processVideo() {
     window.stats.begin();
 
+setInterval(function() {
     const frame = getFrame();
+}, 100);
     
+        
+  
     
 //     const [valid, h, warped] = window.tracker.track(frame, window.width, window.height);
 //     if (valid) {
