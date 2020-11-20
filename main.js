@@ -28,6 +28,7 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
         window.videoElem.play();
     })
     .catch(function(err) {
+	    alert("ERROR : "+ err);
         console.log("ERROR: " + err);
     });
 
