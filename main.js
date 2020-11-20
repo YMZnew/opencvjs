@@ -98,7 +98,7 @@ function getFrame() {
 	
   videoCanvCtx.putImageData(imageData, 0, 0);
     
-	console.log("videoCanv :  "+window.videoCanv.toDataURL() + "videoCanvCtx : "+videoCanvCtx)
+	//console.log("videoCanv :  "+window.videoCanv.toDataURL() + "videoCanvCtx : "+videoCanvCtx)
 //      $('img').attr('src',  window.videoCanv.toDataURL())
     
 //     return videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
