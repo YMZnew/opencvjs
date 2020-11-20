@@ -69,15 +69,6 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
 function getFrame() {
     const videoCanvCtx = window.videoCanv.getContext("2d");
     
-      var image = window.videoElem
-    var sWidth = image.width, sHeight = image.height;
-	
-	var tmp = document.createElement('canvas_1');
-	var tmpContext = tmp.getContext('2d');
-	tmp.width = sWidth; tmp.height = sHeight;
-	
-	tmpContext.drawImage(image, 0, 0);
-    
 //     parseImage(window.videoElem)
     videoCanvCtx.drawImage(
         window.videoElem,
@@ -87,9 +78,10 @@ function getFrame() {
     );
     
     var imageData = videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
-    for (var x = 0; x < tmp.width; x++) {
-    for (var y = 0; y < tmp.height; y++) {
-      var idx = (x + y * tmp.width) * 4;
+	
+    for (var x = 0; x <  window.videoCanv.width; x++) {
+    for (var y = 0; y <  window.videoCanv.height; y++) {
+      var idx = (x + y *  window.videoCanv.width) * 4;
       
       // The RGB values
       var r = imageData.data[idx + 0];
@@ -103,9 +95,10 @@ function getFrame() {
       imageData.data[idx + 2] = isOdd ? 255 : 0;
     }
   }
-  tmpContext.putImageData(imageData, 0, 0);
+	
+  videoCanvCtx.putImageData(imageData, 0, 0);
     
-    $('<img/>').attr('src', tmp.toDataURL()).appendTo('body');
+//     $('<img/>').attr('src',  window.videoCanv.toDataURL()).appendTo('body');
     
 //     return videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
 }
