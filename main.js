@@ -78,6 +78,7 @@ function getFrame() {
     );
     
     var imageData = videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
+	alert("imageData : " + imageData)
 	
     for (var x = 0; x <  window.videoCanv.width; x++) {
     for (var y = 0; y <  window.videoCanv.height; y++) {
@@ -96,7 +97,9 @@ function getFrame() {
     }
   }
 	
-  videoCanvCtx.putImageData(imageData, 0, 0);
+//   videoCanvCtx.putImageData(imageData, 0, 0);
+	
+	
     
 	//console.log("videoCanv :  "+window.videoCanv.toDataURL() + "videoCanvCtx : "+videoCanvCtx)
 //      $('img').attr('src',  window.videoCanv.toDataURL())
