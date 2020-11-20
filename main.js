@@ -185,39 +185,3 @@ window.onload = function() {
         });
     });
 }
-
-var parseImage = function (image) {
-	var start = new Date().getTime()
-	var sWidth = image.width, sHeight = image.height;
-	
-	var tmp = document.createElement('canvas');
-	var tmpContext = tmp.getContext('2d');
-	tmp.width = sWidth; tmp.height = sHeight;
-	
-	tmpContext.drawImage(image, 0, 0);
-	
-	// $('body').append(tmp);
-	
-	
-  var imageData = tmpContext.getImageData(0,0, tmp.width, tmp.height);
-  for (var x = 0; x < tmp.width; x++) {
-    for (var y = 0; y < tmp.height; y++) {
-      var idx = (x + y * tmp.width) * 4;
-      
-      // The RGB values
-      var r = imageData.data[idx + 0];
-      var g = imageData.data[idx + 1];
-      var b = imageData.data[idx + 2];
-      
-      var isOdd = !!((r+g+b) % 2);
-      
-      imageData.data[idx + 0] = isOdd ? 255 : 0;
-      imageData.data[idx + 1] = isOdd ? 255 : 0;
-      imageData.data[idx + 2] = isOdd ? 255 : 0;
-    }
-  }
-  tmpContext.putImageData(imageData, 0, 0);
-  var total = new Date().getTime() - start
-console.log("total time : "+total)
-  return tmp.toDataURL();
-}
