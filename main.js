@@ -19,7 +19,7 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
     window.videoElem.setAttribute("playsinline", "");
 
     navigator.mediaDevices.getUserMedia({
-        video: { facingMode:  exact: "environment" },
+        video: { width: 1280, height: 720 },
         audio: false
     })
     .then(stream => {
