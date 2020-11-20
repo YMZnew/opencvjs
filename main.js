@@ -68,7 +68,7 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
 
 function getFrame() {
     const videoCanvCtx = window.videoCanv.getContext("2d");
-    
+    alert("#1")
 //     parseImage(window.videoElem)
     videoCanvCtx.drawImage(
         window.videoElem,
@@ -76,6 +76,7 @@ function getFrame() {
         window.width,
         window.height
     );
+	alert("#2")
     
     var imageData = videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
 	alert("imageData : " + imageData)
