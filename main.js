@@ -1,10 +1,18 @@
 let width = Math.min(window.innerWidth, window.innerHeight);
 
+let frames = 0;
+
 function initStats() {
     window.stats = new Stats();
     window.stats.showPanel(0);
     document.getElementById("stats").appendChild(stats.domElement);
 }
+
+function toggleTracking() {
+    window.shouldTrack = !window.shouldTrack;
+}
+window.addEventListener("touchstart", toggleTracking);
+window.addEventListener("mousedown", toggleTracking);
 
 function setVideoStyle(elem) {
     elem.style.position = "absolute";
@@ -17,29 +25,18 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
     window.videoElem.setAttribute("autoplay", "");
     window.videoElem.setAttribute("muted", "");
     window.videoElem.setAttribute("playsinline", "");
+    // document.body.appendChild(window.videoElem);
 
-    var size = 1280;
-
-  var constraints = {
-    audio: false,
-    video: {
-      width: { ideal: size },
-      height: { ideal: size },
-      //width: { min: 1024, ideal: window.innerWidth, max: 1920 },
-      //height: { min: 776, ideal: window.innerHeight, max: 1080 },
-      facingMode: 'environment',
-    },
-  };
-
-  navigator.mediaDevices
-    .getUserMedia(constraints)
+    navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "environment" },
+        audio: false
+    })
     .then(stream => {
         const videoSettings = stream.getVideoTracks()[0].getSettings();
         window.videoElem.srcObject = stream;
         window.videoElem.play();
     })
     .catch(function(err) {
-	    alert("ERROR : "+ err);
         console.log("ERROR: " + err);
     });
 
@@ -80,44 +77,14 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
 
 function getFrame() {
     const videoCanvCtx = window.videoCanv.getContext("2d");
-    alert("#1")
-//     parseImage(window.videoElem)
     videoCanvCtx.drawImage(
         window.videoElem,
         0, 0,
         window.width,
         window.height
     );
-	alert("#2")
-    
-    var imageData = videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
-	alert("imageData : " + imageData)
-	
-    for (var x = 0; x <  window.videoCanv.width; x++) {
-    for (var y = 0; y <  window.videoCanv.height; y++) {
-      var idx = (x + y *  window.videoCanv.width) * 4;
-      
-      // The RGB values
-      var r = imageData.data[idx + 0];
-      var g = imageData.data[idx + 1];
-      var b = imageData.data[idx + 2];
-      
-      var isOdd = !!((r+g+b) % 2);
-      
-      imageData.data[idx + 0] = isOdd ? 255 : 0;
-      imageData.data[idx + 1] = isOdd ? 255 : 0;
-      imageData.data[idx + 2] = isOdd ? 255 : 0;
-    }
-  }
-	
-//   videoCanvCtx.putImageData(imageData, 0, 0);
-	
-	
-    
-	//console.log("videoCanv :  "+window.videoCanv.toDataURL() + "videoCanvCtx : "+videoCanvCtx)
-//      $('img').attr('src',  window.videoCanv.toDataURL())
-    
-//     return videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
+
+    return videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
 }
 
 function clearOverlayCtx(overlayCtx) {
@@ -129,7 +96,7 @@ function clearOverlayCtx(overlayCtx) {
     );
 }
 
-function drawBbox(corners) {
+function drawCorners(corners) {
     if (!window.overlayCanv) return;
     const overlayCtx = window.overlayCanv.getContext("2d");
     clearOverlayCtx(overlayCtx);
@@ -148,37 +115,32 @@ function drawBbox(corners) {
     overlayCtx.stroke();
 }
 
-window.addEventListener("touchstart", function() {
-    window.tracker.shouldTrack = !window.tracker.shouldTrack;
-});
-
-window.addEventListener("mousedown", function() {
-    window.tracker.shouldTrack = !window.tracker.shouldTrack;
-});
-
 function processVideo() {
     window.stats.begin();
 
-setInterval(function() {
     const frame = getFrame();
-}, 100);
-    
-        
-  
-    
-//     const [valid, h, warped] = window.tracker.track(frame, window.width, window.height);
-//     if (valid) {
-//         window.tracker.performTransform(h, window.arElem);
-//         drawBbox(warped);
-//     }
-//     else {
-//         clearOverlayCtx(window.overlayCanv.getContext("2d"));
-//         window.arElem.style.display = "none";
-//     }
+    if (window.shouldTrack) {
+        let res;
+        if (++frames % 120 == 0) { // reset tracking every 60 frames in case tracking gets lost
+            res = window.tracker.resetTracking(frame, window.width, window.height);
+        }
+        else {
+            res = window.tracker.track(frame, window.width, window.height);
+        }
 
-//     window.stats.end();
+        if (res.valid) {
+            window.tracker.transformElem(res.H, window.arElem);
+            drawCorners(res.corners);
+        }
+        else {
+            clearOverlayCtx(window.overlayCanv.getContext("2d"));
+            window.arElem.style.display = "none";
+        }
+    }
 
-//     requestAnimationFrame(processVideo);
+    window.stats.end();
+
+    requestAnimationFrame(processVideo);
 }
 
 function createRefIm() {
@@ -195,9 +157,15 @@ window.onload = function() {
         initStats();
         setupVideo(true, true, () => {
             window.tracker.init(createRefIm(), refIm.width, refIm.height);
+
             window.arElem = document.getElementById("arElem");
             window.arElem.style["transform-origin"] = "top left"; // default is center
             window.arElem.style.zIndex = 1;
+
+            const instructionsPopUp = document.getElementById("instructions");
+            instructions.className = "show";
+            setTimeout(() => { instructions.className = "hide"; }, 5000);
+
             requestAnimationFrame(processVideo);
         });
     });
