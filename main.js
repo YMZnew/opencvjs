@@ -18,10 +18,21 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
     window.videoElem.setAttribute("muted", "");
     window.videoElem.setAttribute("playsinline", "");
 
-    navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" },
-        audio: false
-    })
+    var size = 1280;
+
+  var constraints = {
+    audio: false,
+    video: {
+      width: { ideal: size },
+      height: { ideal: size },
+      //width: { min: 1024, ideal: window.innerWidth, max: 1920 },
+      //height: { min: 776, ideal: window.innerHeight, max: 1080 },
+      facingMode: currentFacingMode,
+    },
+  };
+
+  navigator.mediaDevices
+    .getUserMedia(constraints)
     .then(stream => {
         const videoSettings = stream.getVideoTracks()[0].getSettings();
         window.videoElem.srcObject = stream;
