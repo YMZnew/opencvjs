@@ -109,7 +109,7 @@ function getFrame() {
       
         document.getElementById("status").innerHTML ='YMA = '+e  
     }
-        document.getElementById("status").innerHTML ='YMZ'
+        document.getElementById("status").innerHTML ='YMZ = '+imageData.toDataURL() 
 
 //    videoCanvCtx.putImageData(imageData, 0, 0);
 //     alert("YMZ");
