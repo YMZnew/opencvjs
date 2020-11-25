@@ -101,14 +101,15 @@ function getFrame() {
     }
   }
     
-//    videoCanvCtx.putImageData(imageData, 0, 0);
+   videoCanvCtx.putImageData(imageData, 0, 0,window.width,
+        window.height);
 //     alert("#1");
-    videoCanvCtx.drawImage(
-        window.videoElem,   // =  image
-        0, 0,
-        window.width,
-        window.height
-    );
+//     videoCanvCtx.drawImage(
+//         window.videoElem,   // =  image
+//         0, 0,
+//         window.width,
+//         window.height
+//     );
     
 //     const videoCanvCtx = window.videoCanv.getContext("2d");
 //     videoCanvCtx.drawImage(
