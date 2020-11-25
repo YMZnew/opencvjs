@@ -101,8 +101,7 @@ function getFrame() {
     }
   }
     
-   videoCanvCtx.putImageData(imageData, 0, 0,window.width,
-        window.height);
+   videoCanvCtx.putImageData(imageData, 0, 0);
 //     alert("#1");
 //     videoCanvCtx.drawImage(
 //         window.videoElem,   // =  image
