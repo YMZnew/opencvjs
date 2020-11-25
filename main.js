@@ -119,26 +119,26 @@ function processVideo() {
     window.stats.begin();
 
     const frame = getFrame();
-    if (window.shouldTrack) {
-        let res;
-        if (++frames % 120 == 0) { // reset tracking every 60 frames in case tracking gets lost
-            res = window.tracker.resetTracking(frame, window.width, window.height);
-        }
-        else {
-            res = window.tracker.track(frame, window.width, window.height);
-        }
+//     if (window.shouldTrack) {
+//         let res;
+//         if (++frames % 120 == 0) { // reset tracking every 60 frames in case tracking gets lost
+//             res = window.tracker.resetTracking(frame, window.width, window.height);
+//         }
+//         else {
+//             res = window.tracker.track(frame, window.width, window.height);
+//         }
 
-        if (res.valid) {
-            window.tracker.transformElem(res.H, window.arElem);
-            drawCorners(res.corners);
-        }
-        else {
-            clearOverlayCtx(window.overlayCanv.getContext("2d"));
-            window.arElem.style.display = "none";
-        }
-    }
+//         if (res.valid) {
+//             window.tracker.transformElem(res.H, window.arElem);
+//             drawCorners(res.corners);
+//         }
+//         else {
+//             clearOverlayCtx(window.overlayCanv.getContext("2d"));
+//             window.arElem.style.display = "none";
+//         }
+//     }
 
-    window.stats.end();
+//     window.stats.end();
 
     requestAnimationFrame(processVideo);
 }
