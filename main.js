@@ -107,16 +107,18 @@ function getFrame() {
   }
 
     
-    var rImage = document.getElementById("result");
-    try{
-    document.getElementById("result").src = imageData.toDataURL();
-    } catch (e) {
+  //  var rImage = document.getElementById("result");
+   // try{
+   // document.getElementById("result").src = imageData.toDataURL();
+   // } catch (e) {
       
-        document.getElementById("status").innerHTML ='YMA = '+e  
-    }
-        document.getElementById("status").innerHTML ='YMZ = '+imageData.toDataURL() 
+    //    document.getElementById("status").innerHTML ='YMA = '+e  
+  //  }
+       // document.getElementById("status").innerHTML ='YMZ = '+imageData.toDataURL() 
 
-//    videoCanvCtx.putImageData(imageData, 0, 0);
+
+    videoCanvCtx.putImageData(imageData, 0, 0);
+document.getElementById("status").innerHTML ='YMZ = '+imageData.data
 //     alert("YMZ");
 //     videoCanvCtx.drawImage(
 //         window.videoElem,   // =  image
