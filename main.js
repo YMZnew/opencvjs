@@ -101,15 +101,15 @@ function getFrame() {
     }
   }
     
-    alert(imageData);
-//   videoCanvCtx.putImageData(imageData, 0, 0);
     
-    videoCanvCtx.drawImage(
-        imageData,   // =  image
-        0, 0,
-        window.width,
-        window.height
-    );
+   videoCanvCtx.putImageData(imageData, 0, 0);
+    alert("#1");
+//     videoCanvCtx.drawImage(
+//         imageData,   // =  image
+//         0, 0,
+//         window.width,
+//         window.height
+//     );
     
     
 
