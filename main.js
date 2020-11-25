@@ -76,49 +76,49 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
 }
 
 function getFrame() {
-//     const videoCanvCtx = window.videoCanv.getContext("2d");   //  = tmpContext   ,  window.videoCanv  = tmp
+    const videoCanvCtx = window.videoCanv.getContext("2d");   //  = tmpContext   ,  window.videoCanv  = tmp
     
     
     
-// //     var sWidth = window.videoElem.width, sHeight = window.videoElem.height;
-// // 	window.videoCanv.width = sWidth; window.videoCanv.height = sHeight;
-//       var imageData = videoCanvCtx.getImageData(0,0, window.width, window.height);
+//     var sWidth = window.videoElem.width, sHeight = window.videoElem.height;
+// 	window.videoCanv.width = sWidth; window.videoCanv.height = sHeight;
+      var imageData = videoCanvCtx.getImageData(0,0, window.width, window.height);
     
-//   for (var x = 0; x < window.width; x++) {
-//     for (var y = 0; y < window.height; y++) {
-//       var idx = (x + y * window.width) * 4;
+  for (var x = 0; x < window.width; x++) {
+    for (var y = 0; y < window.height; y++) {
+      var idx = (x + y * window.width) * 4;
       
-//       // The RGB values
-//       var r = imageData.data[idx + 0];
-//       var g = imageData.data[idx + 1];
-//       var b = imageData.data[idx + 2];
+      // The RGB values
+      var r = imageData.data[idx + 0];
+      var g = imageData.data[idx + 1];
+      var b = imageData.data[idx + 2];
       
-//       var isOdd = !!((r+g+b) % 2);
+      var isOdd = !!((r+g+b) % 2);
       
-//       imageData.data[idx + 0] = isOdd ? 255 : 0;
-//       imageData.data[idx + 1] = isOdd ? 255 : 0;
-//       imageData.data[idx + 2] = isOdd ? 255 : 0;
-//     }
-//   }
+      imageData.data[idx + 0] = isOdd ? 255 : 0;
+      imageData.data[idx + 1] = isOdd ? 255 : 0;
+      imageData.data[idx + 2] = isOdd ? 255 : 0;
+    }
+  }
     
-// //    videoCanvCtx.putImageData(imageData, 0, 0);
-// //     alert("#1");
-//     videoCanvCtx.drawImage(
-//         window.videoElem,   // =  image
-//         0, 0,
-//         window.width,
-//         window.height
-//     );
-    
-    const videoCanvCtx = window.videoCanv.getContext("2d");
+//    videoCanvCtx.putImageData(imageData, 0, 0);
+//     alert("#1");
     videoCanvCtx.drawImage(
-        window.videoElem,
+        window.videoElem,   // =  image
         0, 0,
         window.width,
         window.height
     );
+    
+//     const videoCanvCtx = window.videoCanv.getContext("2d");
+//     videoCanvCtx.drawImage(
+//         window.videoElem,
+//         0, 0,
+//         window.width,
+//         window.height
+//     );
 
-     return videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
+//      return videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
 
 //     videoCanvCtx.getImageData(0, 0, window.width, window.height).data;   // imageData
 }
