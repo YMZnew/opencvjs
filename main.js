@@ -140,7 +140,7 @@ function processVideo() {
 
 //     window.stats.end();
 
-    requestAnimationFrame(processVideo);
+//     requestAnimationFrame(processVideo);
 }
 
 function createRefIm() {
