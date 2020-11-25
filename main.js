@@ -103,7 +103,7 @@ function getFrame() {
 
     
     var rImage = document.getElementById("result");
-    rImage.src = imageData.toDataURL("image/png");
+//     rImage.src = imageData.toDataURL("image/png");
         document.getElementById("status").innerHTML ='src = '+rImage.width
 
 //    videoCanvCtx.putImageData(imageData, 0, 0);
