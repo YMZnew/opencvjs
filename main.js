@@ -80,13 +80,13 @@ function getFrame() {
     
     
     
-    var sWidth = window.videoElem.width, sHeight = window.videoElem.height;
+//     var sWidth = window.videoElem.width, sHeight = window.videoElem.height;
 // 	window.videoCanv.width = sWidth; window.videoCanv.height = sHeight;
-      var imageData = videoCanvCtx.getImageData(0,0, window.videoCanv.width, window.videoCanv.height);
+      var imageData = videoCanvCtx.getImageData(0,0, window.width, window.height);
     
-  for (var x = 0; x < window.videoCanv.width; x++) {
-    for (var y = 0; y < window.videoCanv.height; y++) {
-      var idx = (x + y * window.videoCanv.width) * 4;
+  for (var x = 0; x < window.width; x++) {
+    for (var y = 0; y < window.height; y++) {
+      var idx = (x + y * window.width) * 4;
       
       // The RGB values
       var r = imageData.data[idx + 0];
@@ -100,7 +100,9 @@ function getFrame() {
       imageData.data[idx + 2] = isOdd ? 255 : 0;
     }
   }
-  videoCanvCtx.putImageData(imageData, 0, 0);
+    
+    alert(imageData);
+//   videoCanvCtx.putImageData(imageData, 0, 0);
     
     videoCanvCtx.drawImage(
         imageData,   // =  image
