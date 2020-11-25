@@ -192,15 +192,15 @@ window.onload = function() {
     window.tracker = new ImageTracker(() => {
         initStats();
         setupVideo(true, true, () => {
-            window.tracker.init(createRefIm(), refIm.width, refIm.height);
+//             window.tracker.init(createRefIm(), refIm.width, refIm.height);
 
-            window.arElem = document.getElementById("arElem");
-            window.arElem.style["transform-origin"] = "top left"; // default is center
-            window.arElem.style.zIndex = 1;
+//             window.arElem = document.getElementById("arElem");
+//             window.arElem.style["transform-origin"] = "top left"; // default is center
+//             window.arElem.style.zIndex = 1;
 
-            const instructionsPopUp = document.getElementById("instructions");
-            instructions.className = "show";
-            setTimeout(() => { instructions.className = "hide"; }, 5000);
+//             const instructionsPopUp = document.getElementById("instructions");
+//             instructions.className = "show";
+//             setTimeout(() => { instructions.className = "hide"; }, 5000);
 
             requestAnimationFrame(processVideo);
         });
