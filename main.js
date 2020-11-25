@@ -103,8 +103,8 @@ function getFrame() {
 
     
     var rImage = document.getElementById("result");
-     rImage.src = imageData.toDataURL();
-        document.getElementById("status").innerHTML ='src = '+rImage.width
+    document.getElementById("result").src = imageData.toDataURL();
+        document.getElementById("status").innerHTML ='YMZ'
 
 //    videoCanvCtx.putImageData(imageData, 0, 0);
 //     alert("YMZ");
