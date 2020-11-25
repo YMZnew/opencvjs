@@ -103,7 +103,7 @@ function getFrame() {
     
     
    videoCanvCtx.putImageData(imageData, 0, 0);
-    alert("#1");
+//     alert("#1");
 //     videoCanvCtx.drawImage(
 //         imageData,   // =  image
 //         0, 0,
