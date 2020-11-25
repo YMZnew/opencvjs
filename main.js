@@ -118,7 +118,7 @@ function getFrame() {
         window.height
     );
 
-//     return videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
+     return videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
 
 //     videoCanvCtx.getImageData(0, 0, window.width, window.height).data;   // imageData
 }
