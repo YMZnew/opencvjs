@@ -79,7 +79,12 @@ function getFrame() {
     const videoCanvCtx = window.videoCanv.getContext("2d");   //  = tmpContext   ,  window.videoCanv  = tmp
     
     
-    
+    videoCanvCtx.drawImage(
+        window.videoElem,
+        0, 0,
+        window.width,
+        window.height
+    );
 //     var sWidth = window.videoElem.width, sHeight = window.videoElem.height;
 // 	window.videoCanv.width = sWidth; window.videoCanv.height = sHeight;
       var imageData = videoCanvCtx.getImageData(0,0, window.width, window.height);
