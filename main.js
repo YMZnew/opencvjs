@@ -76,15 +76,42 @@ function setupVideo(displayVid, displayOverlay, setupCallback) {
 }
 
 function getFrame() {
-    const videoCanvCtx = window.videoCanv.getContext("2d");
+    const videoCanvCtx = window.videoCanv.getContext("2d");   //  = tmpContext   ,  window.videoCanv  = tmp
+    
+    
+    
+    var sWidth = window.videoElem.width, sHeight = window.videoElem.height;
+// 	window.videoCanv.width = sWidth; window.videoCanv.height = sHeight;
+      var imageData = videoCanvCtx.getImageData(0,0, window.videoCanv.width, window.videoCanv.height);
+    
+  for (var x = 0; x < window.videoCanv.width; x++) {
+    for (var y = 0; y < window.videoCanv.height; y++) {
+      var idx = (x + y * window.videoCanv.width) * 4;
+      
+      // The RGB values
+      var r = imageData.data[idx + 0];
+      var g = imageData.data[idx + 1];
+      var b = imageData.data[idx + 2];
+      
+      var isOdd = !!((r+g+b) % 2);
+      
+      imageData.data[idx + 0] = isOdd ? 255 : 0;
+      imageData.data[idx + 1] = isOdd ? 255 : 0;
+      imageData.data[idx + 2] = isOdd ? 255 : 0;
+    }
+  }
+  videoCanvCtx.putImageData(imageData, 0, 0);
+    
     videoCanvCtx.drawImage(
-        window.videoElem,
+        imageData,   // =  image
         0, 0,
         window.width,
         window.height
     );
+    
+    
 
-    return videoCanvCtx.getImageData(0, 0, window.width, window.height).data;
+//     videoCanvCtx.getImageData(0, 0, window.width, window.height).data;   // imageData
 }
 
 function clearOverlayCtx(overlayCtx) {
@@ -140,7 +167,7 @@ function processVideo() {
 
 //     window.stats.end();
 
-//     requestAnimationFrame(processVideo);
+     requestAnimationFrame(processVideo);
 }
 
 function createRefIm() {
