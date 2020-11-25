@@ -101,8 +101,11 @@ function getFrame() {
     }
   }
     
-   videoCanvCtx.putImageData(imageData, 0, 0);
-    alert("YMZ");
+    var rImage = document.getElementById("result");
+    rImage.src = imageData.toDataURL("image/png");
+    
+//    videoCanvCtx.putImageData(imageData, 0, 0);
+//     alert("YMZ");
 //     videoCanvCtx.drawImage(
 //         window.videoElem,   // =  image
 //         0, 0,
