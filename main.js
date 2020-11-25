@@ -118,7 +118,7 @@ function getFrame() {
 
 
     videoCanvCtx.putImageData(imageData, 0, 0);
-document.getElementById("status").innerHTML ='YMZ = '+imageData.data
+// document.getElementById("status").innerHTML ='YMZ = '+imageData.data
 //     alert("YMZ");
 //     videoCanvCtx.drawImage(
 //         window.videoElem,   // =  image
